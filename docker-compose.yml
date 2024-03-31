@@ -1,0 +1,15 @@
+version: '3'
+services:
+  dotnet:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: dotnet-image:1.0
+    container_name: dotnet-container
+    ports:
+      - 5000:80
+    deploy:
+      resources:
+        limits:
+          memory: 1g
+          cpus: '1'
