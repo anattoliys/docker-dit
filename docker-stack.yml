@@ -1,0 +1,40 @@
+version: '3.9'
+services:
+  nginx:
+    image: nginx-dotnet:1.0
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        order: start-first
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+    ports:
+      - 5000:80
+    environment:
+      TZ: "Europe/Moscow"
+    configs:
+      - source: nginx-dotnet.conf
+        target: /etc/nginx/sites-available/nginx-dotnet.conf
+    depends_on:
+      - dotnet
+  dotnet:
+    image: dotnet:1.0
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        order: start-first
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+    environment:
+      TZ: "Europe/Moscow"
+configs:
+  nginx-dotnet.conf:
+    file: nginx-dotnet.conf

@@ -1,3 +1,25 @@
+## ДЗ по уроку 4
+
+Собрать образы nginx и dotnet
+```
+docker-compose build
+```
+
+Запустить стэк
+```
+docker stack deploy -c docker-stack.yml dotnet-stack
+```
+
+Выполнить запрос
+```
+curl http://localhost:5000/weatherforecast
+```
+
+Удалить стэк
+```
+docker stack rm dotnet-stack
+```
+
 ## ДЗ по уроку 3
 
 Запустить контейнер с помощью docker-compose

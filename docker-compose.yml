@@ -1,13 +1,25 @@
 version: '3'
 services:
+  nginx:
+    build:
+      context: ./
+      dockerfile: nginx.Dockerfile
+    image: nginx-dotnet:1.0
+    container_name: nginx-dotnet
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx-dotnet.conf:/etc/nginx/sites-available/nginx-dotnet.conf
+    depends_on:
+      - dotnet
   dotnet:
     build:
       context: ./
       dockerfile: Dockerfile
-    image: dotnet-image:1.0
-    container_name: dotnet-container
+    image: dotnet:1.0
+    container_name: dotnet
     ports:
-      - 5000:80
+      - 4000:80
     deploy:
       resources:
         limits:
