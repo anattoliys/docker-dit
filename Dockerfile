@@ -5,11 +5,13 @@ RUN set -eux \
     && dotnet build WebApplication_DIT_Docker.sln
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0-jammy
+LABEL version 1.0
 WORKDIR /apps
 COPY --from=build /docker-app/WebApplication_DIT_Docker/bin/Debug/net6.0/* /apps/
 RUN set -eux \
-    && useradd dockerappuser \
-    && id dockerappuser
-USER dockerappuser:dockerappuser
+    && groupadd --gid 9000 netgroup \
+    && useradd --uid 9000 --gid 9000 -ms /bin/bash netuser \
+    && chown -R netuser:netgroup /apps
+USER netuser:netgroup
 EXPOSE 80
 ENTRYPOINT [ "dotnet", "/apps/WebApplication_DIT_Docker.dll" ]

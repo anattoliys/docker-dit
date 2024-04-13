@@ -1,13 +1,13 @@
-## ДЗ по уроку 4
+## ДЗ по уроку 4 и 5
 
-Собрать образы nginx и dotnet
+Собрать образы nginx-net и net
 ```
 docker-compose build
 ```
 
 Запустить стэк
 ```
-docker stack deploy -c docker-stack.yml dotnet-stack
+docker stack deploy -c docker-stack.yml net-stack
 ```
 
 Выполнить запрос
@@ -17,7 +17,7 @@ curl http://localhost:5000/weatherforecast
 
 Удалить стэк
 ```
-docker stack rm dotnet-stack
+docker stack rm net-stack
 ```
 
 ## ДЗ по уроку 3

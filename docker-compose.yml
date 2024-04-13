@@ -4,20 +4,20 @@ services:
     build:
       context: ./
       dockerfile: nginx.Dockerfile
-    image: nginx-dotnet:1.0
-    container_name: nginx-dotnet
+    image: nginx-net:1.18.0
+    container_name: nginx-net
     ports:
       - 80:80
     volumes:
-      - ./nginx-dotnet.conf:/etc/nginx/sites-available/nginx-dotnet.conf
+      - ./nginx-net.conf:/etc/nginx/sites-available/nginx-net.conf
     depends_on:
-      - dotnet
-  dotnet:
+      - net
+  net:
     build:
       context: ./
       dockerfile: Dockerfile
-    image: dotnet:1.0
-    container_name: dotnet
+    image: net:1.0
+    container_name: net
     ports:
       - 4000:80
     deploy:

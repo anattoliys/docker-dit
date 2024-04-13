@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   nginx:
-    image: nginx-dotnet:1.0
+    image: nginx-net:1.18.0
     deploy:
       replicas: 1
       update_config:
@@ -17,14 +17,14 @@ services:
     environment:
       TZ: "Europe/Moscow"
     configs:
-      - source: nginx-dotnet.conf
-        target: /etc/nginx/sites-available/nginx-dotnet.conf
+      - source: nginx-net.conf
+        target: /etc/nginx/sites-available/nginx-net.conf
     depends_on:
-      - dotnet
-  dotnet:
-    image: dotnet:1.0
+      - net
+  net:
+    image: net:1.0
     deploy:
-      replicas: 1
+      replicas: 2
       update_config:
         parallelism: 1
         order: start-first
@@ -36,5 +36,5 @@ services:
     environment:
       TZ: "Europe/Moscow"
 configs:
-  nginx-dotnet.conf:
-    file: nginx-dotnet.conf
+  nginx-net.conf:
+    file: nginx-net.conf
